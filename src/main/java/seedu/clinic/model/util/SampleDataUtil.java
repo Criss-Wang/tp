@@ -94,7 +94,7 @@ public class SampleDataUtil {
      * Returns a product set containing the hashmap of strings given.
      */
     public static Set<Product> getProductSet(Set<Product> productSet, Map<String, String[]> productMap) {
-        for (String productName:productMap.keySet()) {
+        for (String productName: productMap.keySet()) {
             Set<Tag> productTags = getTagSet(productMap.get(productName));
             Product product = new Product(new Name(productName), productTags);
             productSet.add(product);
@@ -106,7 +106,7 @@ public class SampleDataUtil {
      * Returns a product set containing the hashmap of strings given.
      */
     public static Set<Product> getProductSetForWarehouse(Set<Product> productSet, Map<String, Integer> productMap) {
-        for (String productName:productMap.keySet()) {
+        for (String productName: productMap.keySet()) {
             Product product = new Product(new Name(productName), productMap.get(productName));
             productSet.add(product);
         }

@@ -1,6 +1,7 @@
 package seedu.clinic.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.clinic.logic.parser.CliSyntax.TYPE_SUPPLIER;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         CommandResult commandResult;
-        if (type.equals("supplier")) {
+        if (type.equals(TYPE_SUPPLIER)) {
             NameContainsKeywordsPredicateForSupplier supplierPredicate =
                     new NameContainsKeywordsPredicateForSupplier(name);
             model.updateFilteredSupplierList(supplierPredicate);

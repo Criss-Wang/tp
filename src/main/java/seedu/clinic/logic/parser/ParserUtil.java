@@ -172,6 +172,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String productName} and a {@code quantity} into a {@code Product}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code productName} or the given {@code quantity} is invalid.
+     */
+    public static Product parseProduct(String productName, String quantity) throws ParseException {
+        requireNonNull(productName);
+        requireNonNull(quantity);
+        Name trimmedName = parseName(productName);
+        int productQuantity = parseQuantity(quantity);
+        return new Product(trimmedName, productQuantity);
+    }
+
+    /**
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -183,6 +197,5 @@ public class ParserUtil {
         }
         return new Remark(trimmedRemark);
     }
-
 
 }

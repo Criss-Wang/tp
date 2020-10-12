@@ -6,12 +6,16 @@ import static seedu.clinic.logic.parser.CliSyntax.TYPE_SUPPLIER;
 import static seedu.clinic.logic.parser.CliSyntax.TYPE_WAREHOUSE;
 import static seedu.clinic.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.clinic.logic.parser.ParserUtil.MESSAGE_INVALID_TYPE;
+import static seedu.clinic.logic.parser.ParserUtil.parseProduct;
 import static seedu.clinic.testutil.Assert.assertThrows;
 import static seedu.clinic.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +27,7 @@ import seedu.clinic.model.attribute.Name;
 import seedu.clinic.model.attribute.Phone;
 import seedu.clinic.model.attribute.Remark;
 import seedu.clinic.model.attribute.Tag;
+import seedu.clinic.model.product.Product;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "@Rachel Pte.Ltd";
@@ -247,5 +252,58 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
-    // TODO: parseProduct test cases
+    @Test
+    public void parseProduct_hasNullValue_throwsNullPointerException() {
+        List<String> tagList = Arrays.asList(VALID_TAG_1, VALID_TAG_2);
+
+        // null name
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProduct(null, tagList));
+
+        // null quantity
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProduct(VALID_NAME, (String) null));
+
+        // null tag list
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProduct(VALID_NAME, (Collection<String>) null));
+    }
+
+    @Test
+    public void parseProduct_invalidValue_throwsParseException() {
+        List<String> validTagList = Arrays.asList(VALID_TAG_1, VALID_TAG_2);
+        List<String> invalidTagList = Arrays.asList(VALID_TAG_1, INVALID_TAG);
+
+        // invalid name
+        assertThrows(ParseException.class, () -> ParserUtil.parseProduct(INVALID_NAME, validTagList));
+
+        // invalid quantity
+        assertThrows(ParseException.class, () -> ParserUtil.parseProduct(VALID_NAME, "-1"));
+
+        // invalid tag value
+        assertThrows(ParseException.class, () -> ParserUtil.parseProduct(VALID_NAME, invalidTagList));
+    }
+
+    @Test
+    public void parseProduct_validValue_returnsProduct() throws Exception{
+
+        // valid name + valid tags
+        List<String> validTagList = Arrays.asList(VALID_TAG_1, VALID_TAG_2);
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Product actualProduct = ParserUtil.parseProduct(VALID_NAME, validTagList);
+        Product expectedProduct = new Product(new Name(VALID_NAME), expectedTagSet);
+
+        assertEquals(expectedProduct, actualProduct);
+
+        // valid name + empty tag list
+        validTagList = new ArrayList<>();
+        expectedTagSet = new HashSet<>();
+        actualProduct = ParserUtil.parseProduct(VALID_NAME, validTagList);
+        expectedProduct = new Product(new Name(VALID_NAME), expectedTagSet);
+
+        assertEquals(expectedProduct, actualProduct);
+
+        // valid name + valid quantity
+        actualProduct = ParserUtil.parseProduct(VALID_NAME, "0");
+        expectedProduct = new Product(new Name(VALID_NAME), 0);
+
+        assertEquals(expectedProduct, actualProduct);
+    }
 }

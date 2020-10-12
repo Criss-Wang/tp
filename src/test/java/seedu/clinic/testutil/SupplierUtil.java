@@ -7,6 +7,7 @@ import static seedu.clinic.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.clinic.logic.parser.CliSyntax.TYPE_SUPPLIER;
 
 import java.util.Set;
 
@@ -28,6 +29,9 @@ public class SupplierUtil {
         return AddCommand.COMMAND_WORD + " " + getSupplierDetails(supplier);
     }
 
+    /**
+     * Returns the part of AddProductCommand string for the given {@code supplier} and {@code product}'s details.
+     */
     public static String getAddProductCommand(Supplier supplier, Product product) {
         StringBuilder sb = new StringBuilder();
         sb.append(AddProductCommand.COMMAND_WORD + " ");
@@ -44,16 +48,10 @@ public class SupplierUtil {
      */
     public static String getSupplierDetails(Supplier supplier) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + supplier.getName().fullName + " ");
+        sb.append(PREFIX_SUPPLIER_NAME + supplier.getName().fullName + " ");
         sb.append(PREFIX_PHONE + supplier.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + supplier.getEmail().value + " ");
         sb.append(PREFIX_REMARK + supplier.getRemark().value + " ");
-        for (Product product:supplier.getProducts()) {
-            sb.append(PREFIX_PRODUCT_NAME + product.getProductName().fullName + " ");
-            product.getProductTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
-            );
-        }
         return sb.toString();
     }
 

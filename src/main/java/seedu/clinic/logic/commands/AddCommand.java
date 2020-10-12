@@ -83,7 +83,7 @@ public class AddCommand extends Command {
             if (model.hasWarehouse(warehouseToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_WAREHOUSE);
             }
-            model.hasWarehouse(warehouseToAdd);
+            model.addWarehouse(warehouseToAdd);
             return new CommandResult(String.format(MESSAGE_WAREHOUSE_SUCCESS, warehouseToAdd));
         }
         return null;

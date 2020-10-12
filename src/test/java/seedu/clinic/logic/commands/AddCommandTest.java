@@ -46,7 +46,7 @@ public class AddCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validSupplier), modelStub.suppliersAdded);
     }
-    /*
+
     @Test
     public void execute_warehouseAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingWarehouseAdded modelStub = new ModelStubAcceptingWarehouseAdded();
@@ -58,7 +58,7 @@ public class AddCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validWarehouse), modelStub.warehousesAdded);
     }
-    */
+
     @Test
     public void execute_duplicateSupplier_throwsCommandException() {
         Supplier validSupplier = new SupplierBuilder().build();

@@ -6,13 +6,11 @@ import static seedu.clinic.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.clinic.logic.commands.AddProductCommand;
 import seedu.clinic.logic.parser.exceptions.ParseException;
 import seedu.clinic.model.attribute.Name;
-import seedu.clinic.model.attribute.Tag;
 import seedu.clinic.model.product.Product;
 
 public class AddProductCommandParser implements Parser<AddProductCommand> {
@@ -33,11 +31,8 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
         }
 
         Name targetSupplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SUPPLIER_NAME).get());
-        Name productName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        Product productToAdd = new Product(productName, tagList);
+        Product productToAdd = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT_NAME).get(),
+                argMultimap.getAllValues(PREFIX_TAG));
 
         return new AddProductCommand(targetSupplierName, productToAdd);
     }

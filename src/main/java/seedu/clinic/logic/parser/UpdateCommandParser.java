@@ -30,9 +30,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         }
 
         Name warehouseName = ParserUtil.parseName(argMultimap.getValue(PREFIX_WAREHOUSE_NAME).get());
-        Name productName = ParserUtil.parseName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        int productQuantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_PRODUCT_QUANTITY).get());
-        Product product = new Product(productName, productQuantity);
+        Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT_NAME).get(),
+                argMultimap.getValue(PREFIX_PRODUCT_QUANTITY).get());
         return new UpdateCommand(warehouseName, product);
     }
 
