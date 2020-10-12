@@ -6,7 +6,6 @@ import static seedu.clinic.logic.parser.CliSyntax.TYPE_SUPPLIER;
 import static seedu.clinic.logic.parser.CliSyntax.TYPE_WAREHOUSE;
 import static seedu.clinic.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.clinic.logic.parser.ParserUtil.MESSAGE_INVALID_TYPE;
-import static seedu.clinic.logic.parser.ParserUtil.parseProduct;
 import static seedu.clinic.testutil.Assert.assertThrows;
 import static seedu.clinic.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
@@ -282,7 +281,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseProduct_validValue_returnsProduct() throws Exception{
+    public void parseProduct_validValue_returnsProduct() throws Exception {
 
         // valid name + valid tags
         List<String> validTagList = Arrays.asList(VALID_TAG_1, VALID_TAG_2);

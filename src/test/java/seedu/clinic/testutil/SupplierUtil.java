@@ -7,7 +7,6 @@ import static seedu.clinic.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.clinic.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.clinic.logic.parser.CliSyntax.TYPE_SUPPLIER;
 
 import java.util.Set;
 
